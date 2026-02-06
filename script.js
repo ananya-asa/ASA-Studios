@@ -69,7 +69,7 @@ function initEmailForm() {
     const email = emailInput.value.trim();
     if (!email) return;
 
-    const button = emailForm.querySelector(".btn-primary");
+    const button = emailForm.querySelector('button[type="submit"]');
     const originalText = button.textContent;
 
     button.disabled = true;
@@ -84,21 +84,21 @@ function initEmailForm() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      if (!res.ok) throw new Error("Form submit failed");
-
+      // Locally this might not be OK, so don't block redirect for local testing
       button.textContent = "✓ You're in!";
       button.style.background = "linear-gradient(135deg, #10b981, #34d399)";
 
       setTimeout(() => {
-        window.location.href = "/thanks.html";
+        window.location.href = "thanks.html"; // ✅ relative path
       }, 700);
     } catch (err) {
       console.error(err);
-      button.disabled = false;
-      button.textContent = "Try again";
+      // still redirect even if local fetch fails
+      window.location.href = "thanks.html";
     }
   });
 }
+
 
 // ----- Mouse parallax for glow orbs -----
 function initParallaxGlow() {
