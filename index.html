@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASA Studios – Your 2D–3D Content Engine</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Background with glowy animation -->
+  <div class="bg">
+    <div class="bg-grid"></div>
+    <div class="glow-orbs">
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="glow-orb glow-orb-2"></div>
+      <div class="glow-orb glow-orb-3"></div>
+      <div class="glow-orb glow-orb-4"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- Header / Nav -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#">
+        <img class="brand-logo" src="ASA__4_-removebg-preview.png" alt="ASA Studios Logo" />
+        <span class="brand-name">ASA Studios</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#what-we-do">What we do</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#demo">Demo</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+
+      <div class="topbar-cta">
+        <a class="btn btn-secondary btn-sm" href="#demo">Watch Demo</a>
+        <a class="btn btn-primary btn-sm" href="#early-access">Join Early Access</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Split Layout -->
+  <main>
+    <section class="hero-intro" id="top">
+      <div class="container container-hero-split">
+        
+        <!-- Left Side: Cartoon Character -->
+        <div class="hero-left">
+          <div class="cartoon-placeholder">
+            <img src="image.png" alt="ASA Studios Character" />
+            <div class="cartoon-badge">AI-Powered</div>
+          </div>
+        </div>
+
+        <!-- Right Side: Animated Brand Name -->
+        <div class="hero-right">
+          <div class="brand-intro">
+            <h1 class="brand-title">
+              <span class="brand-letter" style="--i:0">A</span>
+              <span class="brand-letter" style="--i:1">S</span>
+              <span class="brand-letter" style="--i:2">A</span>
+              <span class="brand-space"></span>
+              <span class="brand-letter" style="--i:3">S</span>
+              <span class="brand-letter" style="--i:4">t</span>
+              <span class="brand-letter" style="--i:5">u</span>
+              <span class="brand-letter" style="--i:6">d</span>
+              <span class="brand-letter" style="--i:7">i</span>
+              <span class="brand-letter" style="--i:8">o</span>
+              <span class="brand-letter" style="--i:9">s</span>
+            </h1>
+            
+            <p class="brand-tagline">YOUR 2D–3D CONTENT ENGINE</p>
+            
+            <p class="brand-description">
+              Turn your ideas into cinematic animated stories using AI – fast, consistent, and premium.
+            </p>
+
+            <div class="brand-cta">
+              <a class="btn btn-primary btn-large" href="#early-access">
+                <span>Join Early Access</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a class="btn btn-secondary btn-large" href="#demo">Watch Demo</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trust Pills -->
+      <div class="container">
+        <div class="trust-intro">
+          <div class="trust-pill">Consistent characters</div>
+          <div class="trust-pill">2D + 3D styles</div>
+          <div class="trust-pill">HD export</div>
+          <div class="trust-pill">Creator-first</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Do -->
+    <section id="what-we-do">
+      <div class="container">
+        <h2 class="section-title fade-in">What We Do</h2>
+        <p class="section-subtitle fade-in">
+          AI tools that transform your creative vision into studio-grade animated content.
+        </p>
+
+        <div class="cards-grid">
+          <div class="card glass fade-in">
+            <div class="glass-sheen"></div>
+            <div class="card-icon">🎬</div>
+            <h3>AI Video Generation</h3>
+            <p>Create premium 2D and 3D animated videos from simple text prompts – cinematic output, fast.</p>
+          </div>
+
+          <div class="card glass fade-in">
+            <div class="glass-sheen"></div>
+            <div class="card-icon">🖼️</div>
+            <h3>Image to Motion</h3>
+            <p>Transform static images into animated sequences with smooth motion, depth, and consistent style.</p>
+          </div>
+
+          <div class="card glass fade-in">
+            <div class="glass-sheen"></div>
+            <div class="card-icon">📖</div>
+            <h3>Story to Animation</h3>
+            <p>Turn scripts into scenes automatically – structured, paced, and ready for creators and teams.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+      <div class="container">
+        <h2 class="section-title fade-in">How It Works</h2>
+        <p class="section-subtitle fade-in">Three steps to your next cinematic animation</p>
+
+        <div class="steps">
+          <div class="step fade-in">
+            <div class="step-number">1</div>
+            <h3>Upload or Write</h3>
+            <p>Start with an idea: prompt, script, images, or references.</p>
+          </div>
+
+          <div class="step fade-in">
+            <div class="step-number">2</div>
+            <h3>ASA AI Builds Scenes</h3>
+            <p>Generate consistent characters, motion, and cinematic composition.</p>
+          </div>
+
+          <div class="step fade-in">
+            <div class="step-number">3</div>
+            <h3>Export & Share</h3>
+            <p>Download in HD, publish, present, or iterate instantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo -->
+    <section id="demo">
+      <div class="container">
+        <h2 class="section-title fade-in">See It In Action</h2>
+        <p class="section-subtitle fade-in">Examples of what you can create with ASA Studios</p>
+
+        <div class="demo-grid">
+          <div class="demo-card glass fade-in">
+            <div class="glass-sheen"></div>
+            <div class="demo-placeholder">🎥</div>
+            <div class="demo-info">
+              <h4>Character Animation</h4>
+              <p>Full character motion from story prompts – consistent, expressive, cinematic.</p>
+            </div>
+          </div>
+
+          <div class="demo-card glass fade-in">
+            <div class="glass-sheen"></div>
+            <div class="demo-placeholder">🌆</div>
+            <div class="demo-info">
+              <h4>Scene Creation</h4>
+              <p>Dynamic environments and mood lighting generated from text.</p>
+            </div>
+          </div>
+
+          <div class="demo-card glass fade-in">
+            <div class="glass-sheen"></div>
+            <div class="demo-placeholder">🎨</div>
+            <div class="demo-info">
+              <h4>Image to Video</h4>
+              <p>Bring illustrations to life with smooth camera and natural motion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   <!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title fade-in">Simple Pricing</h2>
+    <p class="section-subtitle fade-in">Start free – upgrade when you're ready to scale</p>
+
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="pricing-card glass fade-in">
+        <div class="glass-sheen"></div>
+        <h3 class="pricing-title">Free</h3>
+        <div class="pricing-price">$0</div>
+        <p class="pricing-period">Forever</p>
+        <ul class="pricing-features">
+          <li>Videos up to <strong>10 seconds</strong></li>
+          <li>Standard quality (720p)</li>
+          <li>ASA watermark</li>
+          <li>Limited exports/month</li>
+          <li>Community support</li>
+        </ul>
+        <a class="btn btn-secondary" href="#early-access">Get Started</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card featured glass fade-in">
+        <div class="glass-sheen"></div>
+        <h3 class="pricing-title">Pro</h3>
+        <div class="pricing-price">$29</div>
+        <p class="pricing-period">per month</p>
+        <ul class="pricing-features">
+          <li>Videos up to <strong>30 seconds</strong></li>
+          <li>1080p export</li>
+          <li>No watermark</li>
+          <li>More exports/month</li>
+          <li>Priority support</li>
+          <li>Commercial usage rights</li>
+        </ul>
+        <a class="btn btn-primary" href="#early-access">Start Free Trial</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card glass fade-in">
+        <div class="glass-sheen"></div>
+        <h3 class="pricing-title">Premium</h3>
+        <div class="pricing-price">$79</div>
+        <p class="pricing-period">per month</p>
+        <ul class="pricing-features">
+          <li>Videos up to <strong>10 minutes</strong></li>
+          <li>1080p + 4K export</li>
+          <li>No watermark</li>
+          <li>Unlimited exports</li>
+          <li>Fastest rendering</li>
+          <li>Dedicated support</li>
+          <li>Commercial usage rights</li>
+        </ul>
+        <a class="btn btn-secondary" href="#early-access">Contact / Upgrade</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="early-access">
+      <div class="container">
+        <div class="final-shell glass">
+          <div class="glass-sheen"></div>
+
+          <h2 class="fade-in">Ready to create magic?</h2>
+          <p class="section-subtitle fade-in">Join early access and be first to try the studio-grade workflow.</p>
+
+          <form class="email-form fade-in">
+            <input type="email" class="email-input" placeholder="Enter your email" required />
+            <button type="submit" class="btn btn-primary">Get Early Access</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 ASA Studios. All rights reserved. Transforming creativity with AI.</p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
