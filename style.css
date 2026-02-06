@@ -993,3 +993,88 @@ footer p {
     width: 100%;
   }
 }
+
+
+/* ====================== */
+/*   MOBILE PERFORMANCE   */
+/* ====================== */
+
+/* Smooth scroll on mobile can feel laggy with heavy effects */
+@media (max-width: 768px) {
+  html { scroll-behavior: auto; } /* optional: remove smooth scroll on phone */
+}
+
+/* Reduce expensive background effects on phones */
+@media (max-width: 640px) {
+  /* disable grid animation (huge perf win) */
+  .bg-grid { animation: none !important; }
+
+  /* reduce blur + animation load */
+  .glow-orb {
+    filter: blur(50px) !important;
+    animation-duration: 18s !important;
+    opacity: 0.35 !important;
+  }
+
+  /* smaller orbs (less GPU burn) */
+  .glow-orb-1, .glow-orb-2, .glow-orb-3, .glow-orb-4 {
+    width: 320px !important;
+    height: 320px !important;
+  }
+
+  /* fewer particles or disable */
+  .particles { display: none !important; }
+
+  /* backdrop-filter is heavy on mobile */
+  .topbar,
+  .glass {
+    backdrop-filter: none !important;
+  }
+
+  /* reduce huge shadows on mobile */
+  .btn-primary,
+  .cartoon-placeholder,
+  .demo-video-vertical {
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35) !important;
+  }
+
+  /* fixed background can cause jank on mobile browsers */
+  .bg {
+    position: absolute !important;
+  }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-inner {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .brand-logo { width: 38px; height: 38px; }
+  .brand-name { font-size: 1.1rem; }
+
+  .hero-intro {
+    padding: 120px 0 60px; /* less vertical */
+    min-height: auto;
+  }
+
+  .container { padding: 0 1rem; }
+
+  section { padding: 70px 0; }
+
+  .cartoon-badge {
+    right: 18px;
+    bottom: 12px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}

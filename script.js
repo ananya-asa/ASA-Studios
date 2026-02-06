@@ -101,34 +101,54 @@ function initEmailForm() {
 
 
 // ----- Mouse parallax for glow orbs -----
+// ----- Mouse parallax for glow orbs (mobile-safe) -----
 function initParallaxGlow() {
+  const orbs = document.querySelectorAll(".glow-orb");
+  if (!orbs.length) return;
+
+  // ✅ Disable on touch / small screens (fixes mobile jank)
+  const isMobile =
+    window.matchMedia("(max-width: 768px)").matches ||
+    window.matchMedia("(pointer: coarse)").matches;
+
+  if (isMobile) return;
+
   let mouseX = 0, mouseY = 0;
   let currentX = 0, currentY = 0;
 
-  document.addEventListener("mousemove", (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
+  // ✅ Passive listener (better performance)
+  document.addEventListener(
+    "mousemove",
+    (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    },
+    { passive: true }
+  );
 
-  const orbs = document.querySelectorAll(".glow-orb");
+  let rafId = null;
 
   function updateParallax() {
-    // Smooth interpolation
-    currentX += (mouseX - currentX) * 0.05;
-    currentY += (mouseY - currentY) * 0.05;
+    currentX += (mouseX - currentX) * 0.06;
+    currentY += (mouseY - currentY) * 0.06;
 
     orbs.forEach((orb, i) => {
-      const speed = (i + 1) * 15;
-      const x = currentX * speed;
-      const y = currentY * speed;
-      orb.style.transform = `translate(${x}px, ${y}px)`;
+      const speed = (i + 1) * 12; // slightly lighter
+      orb.style.transform = `translate3d(${currentX * speed}px, ${currentY * speed}px, 0)`;
     });
 
-    requestAnimationFrame(updateParallax);
+    rafId = requestAnimationFrame(updateParallax);
   }
 
   updateParallax();
+
+  // ✅ Stop animation when tab is hidden (saves battery)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && rafId) cancelAnimationFrame(rafId);
+    if (!document.hidden) updateParallax();
+  });
 }
+
 
 // ----- Add hover glow to cards -----
 function initCardGlow() {
