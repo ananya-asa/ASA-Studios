@@ -57,32 +57,46 @@ function initSmoothScroll() {
   });
 }
 
-// ----- Email form handler -----
+// ----- Email form handler (Netlify-friendly) -----
 function initEmailForm() {
   const emailForm = document.querySelector(".email-form");
   if (!emailForm) return;
 
-  emailForm.addEventListener("submit", (e) => {
+  emailForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const emailInput = emailForm.querySelector(".email-input");
     const email = emailInput.value.trim();
-
     if (!email) return;
 
-    // Replace this with your backend later
-    console.log("Early access email:", email);
-
-    // Success feedback
     const button = emailForm.querySelector(".btn-primary");
     const originalText = button.textContent;
-    button.textContent = "✓ You're in!";
-    button.style.background = "linear-gradient(135deg, #10b981, #34d399)";
 
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.style.background = "";
-      emailInput.value = "";
-    }, 3000);
+    button.disabled = true;
+    button.textContent = "Sending...";
+
+    try {
+      const formData = new FormData(emailForm);
+
+      const res = await fetch("/", {
+        method: "POST",
+        body: new URLSearchParams(formData).toString(),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+
+      if (!res.ok) throw new Error("Form submit failed");
+
+      button.textContent = "✓ You're in!";
+      button.style.background = "linear-gradient(135deg, #10b981, #34d399)";
+
+      setTimeout(() => {
+        window.location.href = "/thanks.html";
+      }, 700);
+    } catch (err) {
+      console.error(err);
+      button.disabled = false;
+      button.textContent = "Try again";
+    }
   });
 }
 
