@@ -707,6 +707,38 @@ section {
   line-height: 1.6;
 }
 
+
+/* ====================== */
+/*   VERTICAL VIDEO DEMOS */
+/* ====================== */
+
+.vertical-demos {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.demo-video-vertical {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+}
+
+/* Remove old emoji placeholder spacing */
+.demo-placeholder {
+  display: none;
+}
+
+/* Tighten card for reels */
+.demo-card {
+  padding: 1.4rem;
+}
+
+.demo-card h4 {
+  margin-top: 0.4rem;
+}
+
 /* ====================== */
 /*   PRICING (UPDATED)    */
 /* ====================== */
