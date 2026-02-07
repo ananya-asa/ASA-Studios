@@ -1,9 +1,13 @@
-// ----- Enhanced Particles with Glow -----
+// ===============================================
+// ASA Studios - Optimized & Smooth Animations
+// ===============================================
+
+// ----- Enhanced Particles -----
 function createParticles() {
   const particlesContainer = document.getElementById("particles");
   if (!particlesContainer) return;
 
-  const particleCount = 35; // More particles for richer effect
+  const particleCount = 35;
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement("div");
@@ -18,7 +22,7 @@ function createParticles() {
   }
 }
 
-// ----- Scroll reveal with stagger -----
+// ----- Scroll reveal -----
 function initScrollAnimations() {
   const observerOptions = {
     threshold: 0.15,
@@ -36,7 +40,7 @@ function initScrollAnimations() {
   document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
 }
 
-// ----- Smooth scrolling for nav links -----
+// ----- Smooth scrolling -----
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
@@ -48,7 +52,7 @@ function initSmoothScroll() {
 
       e.preventDefault();
       
-      const offsetTop = target.offsetTop - 80; // Account for fixed header
+      const offsetTop = target.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth"
@@ -57,7 +61,7 @@ function initSmoothScroll() {
   });
 }
 
-// ----- Email form handler (Netlify-friendly) -----
+// ----- Email form -----
 function initEmailForm() {
   const emailForm = document.querySelector(".email-form");
   if (!emailForm) return;
@@ -70,7 +74,6 @@ function initEmailForm() {
     if (!email) return;
 
     const button = emailForm.querySelector('button[type="submit"]');
-    const originalText = button.textContent;
 
     button.disabled = true;
     button.textContent = "Sending...";
@@ -78,35 +81,31 @@ function initEmailForm() {
     try {
       const formData = new FormData(emailForm);
 
-      const res = await fetch("/", {
+      await fetch("/", {
         method: "POST",
         body: new URLSearchParams(formData).toString(),
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      // Locally this might not be OK, so don't block redirect for local testing
       button.textContent = "✓ You're in!";
       button.style.background = "linear-gradient(135deg, #10b981, #34d399)";
 
       setTimeout(() => {
-        window.location.href = "thanks.html"; // ✅ relative path
+        window.location.href = "thanks.html";
       }, 700);
     } catch (err) {
       console.error(err);
-      // still redirect even if local fetch fails
       window.location.href = "thanks.html";
     }
   });
 }
 
-
-// ----- Mouse parallax for glow orbs -----
-// ----- Mouse parallax for glow orbs (mobile-safe) -----
+// ----- Mouse parallax (optimized, no jank) -----
 function initParallaxGlow() {
   const orbs = document.querySelectorAll(".glow-orb");
   if (!orbs.length) return;
 
-  // ✅ Disable on touch / small screens (fixes mobile jank)
+  // Disable on mobile/touch devices
   const isMobile =
     window.matchMedia("(max-width: 768px)").matches ||
     window.matchMedia("(pointer: coarse)").matches;
@@ -115,8 +114,8 @@ function initParallaxGlow() {
 
   let mouseX = 0, mouseY = 0;
   let currentX = 0, currentY = 0;
+  let rafId = null;
 
-  // ✅ Passive listener (better performance)
   document.addEventListener(
     "mousemove",
     (e) => {
@@ -126,31 +125,34 @@ function initParallaxGlow() {
     { passive: true }
   );
 
-  let rafId = null;
-
   function updateParallax() {
-    currentX += (mouseX - currentX) * 0.06;
-    currentY += (mouseY - currentY) * 0.06;
+    currentX += (mouseX - currentX) * 0.05;
+    currentY += (mouseY - currentY) * 0.05;
 
     orbs.forEach((orb, i) => {
-      const speed = (i + 1) * 12; // slightly lighter
+      const speed = (i + 1) * 12;
       orb.style.transform = `translate3d(${currentX * speed}px, ${currentY * speed}px, 0)`;
     });
 
     rafId = requestAnimationFrame(updateParallax);
   }
 
-  updateParallax();
+  // Start after delay to prevent initial lag
+  setTimeout(() => {
+    updateParallax();
+  }, 500);
 
-  // ✅ Stop animation when tab is hidden (saves battery)
+  // Pause when hidden
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && rafId) cancelAnimationFrame(rafId);
-    if (!document.hidden) updateParallax();
+    if (document.hidden && rafId) {
+      cancelAnimationFrame(rafId);
+    } else if (!document.hidden) {
+      updateParallax();
+    }
   });
 }
 
-
-// ----- Add hover glow to cards -----
+// ----- Card hover glow -----
 function initCardGlow() {
   const cards = document.querySelectorAll(".card, .demo-card, .pricing-card");
 
@@ -165,13 +167,14 @@ function initCardGlow() {
   });
 }
 
-// ----- Floating animation for cartoon -----
+// ----- Cartoon floating animation -----
 function initCartoonFloat() {
   const cartoon = document.querySelector(".cartoon-placeholder");
   if (!cartoon) return;
 
   let floatY = 0;
   let direction = 1;
+  let rafId = null;
 
   function animate() {
     floatY += 0.3 * direction;
@@ -181,13 +184,25 @@ function initCartoonFloat() {
     }
 
     cartoon.style.transform = `translateY(${floatY}px)`;
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
   }
 
-  animate();
+  // Start after delay
+  setTimeout(() => {
+    animate();
+  }, 600);
+
+  // Pause when hidden
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && rafId) {
+      cancelAnimationFrame(rafId);
+    } else if (!document.hidden && !rafId) {
+      animate();
+    }
+  });
 }
 
-// ----- Add shimmer effect to buttons -----
+// ----- Button shimmer -----
 function initButtonShimmer() {
   const buttons = document.querySelectorAll(".btn-primary");
 
@@ -201,7 +216,6 @@ function initButtonShimmer() {
     });
   });
 
-  // Add shimmer keyframe if not exists
   if (!document.querySelector("#shimmer-style")) {
     const style = document.createElement("style");
     style.id = "shimmer-style";
@@ -216,55 +230,63 @@ function initButtonShimmer() {
   }
 }
 
-// ----- Header scroll effect -----
+// ----- Header scroll effect (optimized) -----
 function initHeaderScroll() {
   const topbar = document.querySelector(".topbar");
-  let lastScroll = 0;
+  if (!topbar) return;
+
+  let ticking = false;
 
   window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScroll = window.pageYOffset;
 
-    if (currentScroll > 100) {
-      topbar.style.background = "rgba(10, 10, 15, 0.95)";
-      topbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.3)";
-    } else {
-      topbar.style.background = "rgba(10, 10, 15, 0.7)";
-      topbar.style.boxShadow = "";
+        if (currentScroll > 100) {
+          topbar.style.background = "rgba(10, 10, 15, 0.95)";
+          topbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.3)";
+        } else {
+          topbar.style.background = "rgba(10, 10, 15, 0.7)";
+          topbar.style.boxShadow = "";
+        }
+
+        ticking = false;
+      });
+
+      ticking = true;
     }
-
-    lastScroll = currentScroll;
-  });
+  }, { passive: true });
 }
 
-// ----- Initialize everything on load -----
+// ===============================================
+// INITIALIZATION (Staggered for smooth load)
+// ===============================================
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🎬 ASA Studios - Initializing...");
 
-  // Create background effects
+  // Immediate init
   createParticles();
-
-  // Initialize animations
-  initScrollAnimations();
-  initSmoothScroll();
-  initEmailForm();
-  initParallaxGlow();
-  initCardGlow();
-  initCartoonFloat();
-  initButtonShimmer();
-  initHeaderScroll();
-
-  // Mark page as loaded
+  
+  // Stagger heavy animations to prevent lag spike
   setTimeout(() => {
-    document.body.classList.add("loaded");
-    console.log("✓ ASA Studios - Ready!");
+    initScrollAnimations();
+    initSmoothScroll();
+    initEmailForm();
+    initHeaderScroll();
+    initCardGlow();
+    initButtonShimmer();
   }, 100);
+
+  setTimeout(() => {
+    initParallaxGlow();
+    initCartoonFloat();
+  }, 400);
+
+  console.log("✓ ASA Studios - Ready!");
 });
 
-// ----- Add loading state -----
+// Smooth page reveal (no flash/glitch)
 window.addEventListener("load", () => {
-  document.body.style.opacity = "0";
-  setTimeout(() => {
-    document.body.style.transition = "opacity 0.5s ease";
-    document.body.style.opacity = "1";
-  }, 50);
+  document.body.classList.add("page-loaded");
 });
